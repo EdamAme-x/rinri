@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { ArrowRight } from 'lucide-vue-next'
+import { XIcon, DiscordIcon, GitHubIcon } from 'vue3-simple-icons'
+
 const SEARCH_URL = 'https://www.google.com/search?q=%E6%8A%80%E8%A1%93%E8%80%85%E5%80%AB%E7%90%86'
 const ACM_CODE_URL = 'https://www.acm.org/binaries/content/assets/code-of-ethics/se-code-jpn.pdf'
 const DISCORD_URL = 'https://discord.gg/evex'
@@ -23,8 +26,8 @@ const X_SHARE_URL =
 
       <div class="actions">
         <a class="btn btn-primary" :href="SEARCH_URL" target="_blank" rel="noopener noreferrer">
-          技術者倫理について調べる
-          <span class="arrow" aria-hidden="true">→</span>
+          <span>技術者倫理について調べる</span>
+          <ArrowRight class="arrow" :size="16" aria-hidden="true" />
         </a>
 
         <a
@@ -34,12 +37,7 @@ const X_SHARE_URL =
           rel="noopener noreferrer"
           aria-label="Xで共有する"
         >
-          <svg class="x-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-            <path
-              fill="currentColor"
-              d="M18.244 2H21.5l-7.5 8.57L23 22h-6.844l-5.36-6.99L4.6 22H1.34l8.02-9.166L1 2h7.02l4.83 6.39L18.244 2Zm-1.2 18h1.86L7.04 4H5.07L17.044 20Z"
-            />
-          </svg>
+          <XIcon :size="16" aria-hidden="true" />
           <span>Xで広める</span>
         </a>
       </div>
@@ -52,12 +50,26 @@ const X_SHARE_URL =
     </section>
 
     <footer class="footer">
-      <a class="link" :href="DISCORD_URL" target="_blank" rel="noopener noreferrer">
-        discord.gg/evex
+      <a
+        class="icon-link"
+        :href="DISCORD_URL"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Discord (evex)"
+        title="discord.gg/evex"
+      >
+        <DiscordIcon :size="20" aria-hidden="true" />
       </a>
-      <span class="sep" aria-hidden="true">/</span>
-      <a class="link" :href="GITHUB_URL" target="_blank" rel="noopener noreferrer">
-        github.com/EdamAme-x/rinri
+
+      <a
+        class="icon-link"
+        :href="GITHUB_URL"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub (EdamAme-x/rinri)"
+        title="github.com/EdamAme-x/rinri"
+      >
+        <GitHubIcon :size="20" aria-hidden="true" />
       </a>
     </footer>
   </main>
@@ -198,6 +210,11 @@ const X_SHARE_URL =
   transform: translateX(2px);
 }
 
+.btn :deep(svg) {
+  display: block;
+  flex-shrink: 0;
+}
+
 .x-icon {
   display: block;
   flex-shrink: 0;
@@ -214,7 +231,7 @@ const X_SHARE_URL =
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem 0.75rem;
+  gap: 0.25rem;
   flex-wrap: wrap;
   padding: 1.5rem 0 0.5rem;
   border-top: 1px solid var(--hairline);
@@ -237,6 +254,31 @@ const X_SHARE_URL =
 .link:hover {
   color: var(--fg);
   border-bottom-color: currentColor;
+}
+
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  color: var(--muted);
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    color 150ms ease,
+    background-color 150ms ease,
+    transform 150ms ease;
+}
+
+.icon-link:hover {
+  color: var(--fg);
+  background: var(--hairline);
+  transform: translateY(-1px);
+}
+
+.icon-link :deep(svg) {
+  display: block;
 }
 
 .sep {
