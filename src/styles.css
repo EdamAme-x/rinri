@@ -1,9 +1,11 @@
 :root {
-  --bg: #0b1220;
-  --fg: #e2e8f0;
-  --muted: #94a3b8;
+  --bg: #ffffff;
+  --fg: #0a0a0a;
+  --muted: #6b6b6b;
+  --border: #e5e5e5;
+  --hairline: #ededed;
 
-  color-scheme: dark light;
+  color-scheme: light dark;
   font-family:
     'Inter',
     system-ui,
@@ -19,11 +21,13 @@
   text-rendering: optimizeLegibility;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
-    --bg: #f8fafc;
-    --fg: #0f172a;
-    --muted: #475569;
+    --bg: #0a0a0a;
+    --fg: #f5f5f5;
+    --muted: #a3a3a3;
+    --border: #262626;
+    --hairline: #1a1a1a;
   }
 }
 
@@ -41,9 +45,7 @@ body {
 }
 
 body {
-  background:
-    radial-gradient(1200px 600px at 80% -10%, rgba(129, 140, 248, 0.18), transparent 60%),
-    radial-gradient(800px 500px at 0% 110%, rgba(244, 114, 182, 0.14), transparent 60%), var(--bg);
+  background: var(--bg);
   color: var(--fg);
   line-height: 1.6;
 }
@@ -57,7 +59,12 @@ a {
 }
 
 :focus-visible {
-  outline: 2px solid #a5b4fc;
+  outline: 2px solid var(--fg);
   outline-offset: 3px;
-  border-radius: 6px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--fg);
+  color: var(--bg);
 }

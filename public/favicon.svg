@@ -1,12 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#38bdf8"/>
-      <stop offset="55%" stop-color="#818cf8"/>
-      <stop offset="100%" stop-color="#f472b6"/>
-    </linearGradient>
-  </defs>
-  <rect width="64" height="64" rx="14" fill="url(#g)"/>
+  <rect width="64" height="64" rx="12" fill="#0a0a0a"/>
   <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
-        font-family="system-ui, sans-serif" font-size="30" font-weight="800" fill="#0b1220">倫</text>
+        font-family="system-ui, -apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif"
+        font-size="34" font-weight="700" fill="#ffffff">倫</text>
 </svg>
