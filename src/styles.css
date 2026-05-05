@@ -6,8 +6,8 @@
   --hairline: #ededed;
 
   /* grid backdrop */
-  --grid-line: rgba(10, 10, 10, 0.08);
-  --grid-line-strong: rgba(10, 10, 10, 0.14);
+  --grid-line: rgba(10, 10, 10, 0.04);
+  --grid-line-strong: rgba(10, 10, 10, 0.07);
   --grid-size: 56px;
   --grid-line-width: 1px;
   --vignette: rgba(10, 10, 10, 0.04);
@@ -36,8 +36,8 @@
     --border: #262626;
     --hairline: #1a1a1a;
 
-    --grid-line: rgba(245, 245, 245, 0.07);
-    --grid-line-strong: rgba(245, 245, 245, 0.14);
+    --grid-line: rgba(245, 245, 245, 0.035);
+    --grid-line-strong: rgba(245, 245, 245, 0.07);
     --vignette: rgba(0, 0, 0, 0.5);
   }
 }
