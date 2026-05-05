@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const SEARCH_URL = 'https://www.google.com/search?q=%E6%8A%80%E8%A1%93%E8%80%85%E5%80%AB%E7%90%86'
+const ACM_CODE_URL = 'https://www.acm.org/binaries/content/assets/code-of-ethics/se-code-jpn.pdf'
 const DISCORD_URL = 'https://discord.gg/evex'
 const GITHUB_URL = 'https://github.com/EdamAme-x/rinri'
 
@@ -24,6 +25,27 @@ const X_SHARE_URL =
         <a class="btn btn-primary" :href="SEARCH_URL" target="_blank" rel="noopener noreferrer">
           技術者倫理について調べる
           <span class="arrow" aria-hidden="true">→</span>
+        </a>
+
+        <a class="btn btn-ghost" :href="ACM_CODE_URL" target="_blank" rel="noopener noreferrer">
+          <svg
+            class="doc-icon"
+            viewBox="0 0 24 24"
+            width="16"
+            height="16"
+            aria-hidden="true"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="8" y1="13" x2="16" y2="13" />
+            <line x1="8" y1="17" x2="13" y2="17" />
+          </svg>
+          <span>ACM 倫理綱領</span>
         </a>
 
         <a
@@ -191,7 +213,8 @@ const X_SHARE_URL =
   transform: translateX(2px);
 }
 
-.x-icon {
+.x-icon,
+.doc-icon {
   display: block;
   flex-shrink: 0;
 }
