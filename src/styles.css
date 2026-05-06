@@ -5,6 +5,10 @@
   --border: #e5e5e5;
   --hairline: #ededed;
 
+  /* code surfaces — slightly tinted so they don't disappear into the page */
+  --code-bg: #f7f7f8;
+  --code-head-bg: #f0f0f2;
+
   /* grid backdrop */
   --grid-line: rgba(10, 10, 10, 0.04);
   --grid-line-strong: rgba(10, 10, 10, 0.07);
@@ -35,6 +39,9 @@
     --muted: #a3a3a3;
     --border: #262626;
     --hairline: #1a1a1a;
+
+    --code-bg: #141414;
+    --code-head-bg: #1c1c1c;
 
     --grid-line: rgba(245, 245, 245, 0.035);
     --grid-line-strong: rgba(245, 245, 245, 0.07);

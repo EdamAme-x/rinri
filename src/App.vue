@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ArrowRight } from 'lucide-vue-next'
+import { ref } from 'vue'
+import { ArrowRight, Check, Copy } from 'lucide-vue-next'
 import { XIcon, DiscordIcon, GitHubIcon } from 'vue3-simple-icons'
 
 const SEARCH_URL = 'https://www.google.com/search?q=%E6%8A%80%E8%A1%93%E8%80%85%E5%80%AB%E7%90%86'
@@ -7,16 +8,57 @@ const ACM_CODE_URL = 'https://www.acm.org/binaries/content/assets/code-of-ethics
 const ACM_CODE_MD_URL = 'https://github.com/EdamAme-x/rinri/blob/main/docs/se-code-jpn.md'
 const DISCORD_URL = 'https://discord.gg/evex'
 const GITHUB_URL = 'https://github.com/EdamAme-x/rinri'
+const SITE_URL = 'https://技術者倫理.com'
 
 const SHARE_TEXT = '技術者倫理を守ろう。'
-const SHARE_URL = 'https://技術者倫理.com'
 const SHARE_HASHTAGS = '技術者倫理'
 
 const X_SHARE_URL =
   'https://twitter.com/intent/tweet' +
   `?text=${encodeURIComponent(SHARE_TEXT)}` +
-  `&url=${encodeURIComponent(SHARE_URL)}` +
+  `&url=${encodeURIComponent(SITE_URL)}` +
   `&hashtags=${encodeURIComponent(SHARE_HASHTAGS)}`
+
+// shields.io static badge — black text on white label, links to the site
+const BADGE_IMG_URL =
+  'https://img.shields.io/badge/' +
+  encodeURIComponent('技術者倫理') +
+  '-' +
+  encodeURIComponent('遵守済み') +
+  '-0a0a0a?style=for-the-badge&labelColor=ffffff'
+
+const BADGE_MD = `[![技術者倫理 遵守済み](${BADGE_IMG_URL})](${SITE_URL})`
+const BADGE_HTML = `<a href="${SITE_URL}"><img src="${BADGE_IMG_URL}" alt="技術者倫理 遵守済み" /></a>`
+
+type SnippetKind = 'md' | 'html'
+
+const snippetKind = ref<SnippetKind>('md')
+const snippets: Record<SnippetKind, string> = {
+  md: BADGE_MD,
+  html: BADGE_HTML,
+}
+
+const copied = ref(false)
+let copyTimer: number | undefined
+
+async function copySnippet() {
+  const text = snippets[snippetKind.value]
+  try {
+    await navigator.clipboard.writeText(text)
+  } catch {
+    const ta = document.createElement('textarea')
+    ta.value = text
+    ta.style.position = 'fixed'
+    ta.style.opacity = '0'
+    document.body.appendChild(ta)
+    ta.select()
+    document.execCommand('copy')
+    document.body.removeChild(ta)
+  }
+  copied.value = true
+  if (copyTimer) window.clearTimeout(copyTimer)
+  copyTimer = window.setTimeout(() => (copied.value = false), 1600)
+}
 </script>
 
 <template>
@@ -64,6 +106,37 @@ const X_SHARE_URL =
       </p>
     </section>
 
+    <section class="badge-section" aria-labelledby="badge-heading">
+      <h2 id="badge-heading" class="badge-heading">README に貼れるバッジ</h2>
+
+      <a class="badge-preview" :href="SITE_URL" rel="noopener noreferrer">
+        <img :src="BADGE_IMG_URL" alt="技術者倫理 遵守済み" width="200" height="28" />
+      </a>
+
+      <div class="snippet">
+        <div class="snippet-head">
+          <label class="snippet-select">
+            <select v-model="snippetKind" aria-label="フォーマット">
+              <option value="md">Markdown</option>
+              <option value="html">HTML</option>
+            </select>
+            <span class="snippet-select-caret" aria-hidden="true">▾</span>
+          </label>
+          <button
+            type="button"
+            class="snippet-copy"
+            :aria-label="copied ? 'コピーしました' : 'コピー'"
+            @click="copySnippet"
+          >
+            <Check v-if="copied" :size="14" aria-hidden="true" />
+            <Copy v-else :size="14" aria-hidden="true" />
+            <span>{{ copied ? 'Copied' : 'Copy' }}</span>
+          </button>
+        </div>
+        <pre class="snippet-code"><code>{{ snippets[snippetKind] }}</code></pre>
+      </div>
+    </section>
+
     <footer class="footer">
       <a
         class="icon-link"
@@ -96,7 +169,7 @@ const X_SHARE_URL =
 .page {
   min-height: 100dvh;
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: 1fr auto auto;
   padding: 2rem 1.25rem calc(1.25rem + env(safe-area-inset-bottom));
   padding-left: max(1.25rem, env(safe-area-inset-left));
   padding-right: max(1.25rem, env(safe-area-inset-right));
@@ -259,6 +332,155 @@ const X_SHARE_URL =
 .reference-md {
   margin-left: 0.4rem;
   opacity: 0.85;
+}
+
+.badge-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1.5rem 0 0;
+  border-top: 1px solid var(--hairline);
+  text-align: center;
+}
+
+.badge-heading {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--fg);
+}
+
+.badge-preview {
+  display: inline-block;
+  margin-top: 0.25rem;
+  border-radius: 4px;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 150ms ease;
+}
+
+.badge-preview:hover {
+  transform: translateY(-1px);
+}
+
+.badge-preview img {
+  display: block;
+  height: 28px;
+  width: auto;
+}
+
+.snippet {
+  width: 100%;
+  max-width: 560px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--code-bg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  text-align: left;
+}
+
+.snippet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.45rem 0.55rem 0.45rem 0.65rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--code-head-bg);
+}
+
+.snippet-select {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.snippet-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 0.3rem 1.6rem 0.3rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease;
+}
+
+.snippet-select select:hover {
+  border-color: var(--fg);
+}
+
+.snippet-select select:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
+}
+
+.snippet-select-caret {
+  position: absolute;
+  right: 0.5rem;
+  pointer-events: none;
+  font-size: 0.65rem;
+  color: var(--muted);
+}
+
+.snippet-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease,
+    transform 120ms ease;
+}
+
+.snippet-copy:hover {
+  border-color: var(--fg);
+  transform: translateY(-1px);
+}
+
+.snippet-copy:active {
+  transform: translateY(0);
+}
+
+.snippet-copy :deep(svg) {
+  display: block;
+}
+
+.snippet-code {
+  margin: 0;
+  padding: 0.85rem 0.95rem;
+  font-family:
+    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--fg);
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-x: auto;
+}
+
+.snippet-code code {
+  font: inherit;
+  color: inherit;
 }
 
 .footer {
