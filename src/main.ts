@@ -1,4 +1,5 @@
 import { ViteSSG } from 'vite-ssg/single-page'
+import 'virtual:vize-styles'
 import App from './App.vue'
 import './styles.css'
 
