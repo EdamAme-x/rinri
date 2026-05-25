@@ -8,7 +8,6 @@ export const createApp = ViteSSG(App, ({ isClient }) => {
   const banner = '%c⚠ 開発者タブを閉じてください！'
   const sub = '%cソースを覗くのは技術者倫理違反です！！\n— 技術者倫理.com'
 
-  // eslint-disable-next-line no-console
   console.log(
     banner + '\n' + sub,
     'color:#ff3b3b;font-size:28px;font-weight:800;letter-spacing:0.04em;',

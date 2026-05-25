@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import vize from '@vizejs/vite-plugin'
 
 // Use polling watcher when running on WSL/Windows-mounted paths,
 // where inotify events don't propagate from the Windows filesystem.
@@ -7,7 +7,7 @@ const isWslOnWindowsMount = process.cwd().startsWith('/mnt/')
 
 export default defineConfig({
   base: '/',
-  plugins: [vue()],
+  plugins: [vize()],
   server: {
     watch: isWslOnWindowsMount
       ? {
