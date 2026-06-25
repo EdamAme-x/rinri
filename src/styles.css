@@ -167,18 +167,8 @@ a {
 }
 
 .hero .eyebrow-text::after {
-  content: '' !important;
-  position: absolute;
-  left: 50%;
-  bottom: -0.18rem;
-  width: 0.45rem;
-  height: 1px;
-  background: currentColor;
-  opacity: 0;
-  transform: translateX(-50%) scaleX(0);
-  transform-origin: center;
-  animation: eyebrow-glint 700ms ease-out 180ms both;
-  pointer-events: none;
+  content: none !important;
+  display: none !important;
 }
 
 .hero .actions {
@@ -187,28 +177,6 @@ a {
 
 .hero .reference {
   margin: 0.9rem 0 0 !important;
-}
-
-@keyframes eyebrow-glint {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) scaleX(0);
-  }
-  40% {
-    opacity: 0.75;
-    transform: translateX(-50%) scaleX(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(-50%) scaleX(0.2);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero .eyebrow-text::after {
-    animation: none !important;
-    opacity: 0 !important;
-  }
 }
 
 ::selection {
