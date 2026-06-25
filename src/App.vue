@@ -64,7 +64,7 @@ async function copySnippet() {
 <template>
   <main class="page">
     <section class="hero">
-      <p class="eyebrow">Engineering Ethics</p>
+      <p class="eyebrow"><span class="eyebrow-text">Engineering Ethics</span></p>
       <h1 class="title">技術者倫理を守ろう</h1>
 
       <p class="sr-only">技術者倫理を守ろう。</p>
@@ -182,6 +182,7 @@ async function copySnippet() {
 }
 
 .hero {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -191,12 +192,54 @@ async function copySnippet() {
 }
 
 .eyebrow {
-  margin: 0;
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  margin: 0 0 -0.65rem;
+  font-family: 'Great Vibes', 'Snell Roundhand', 'Zapfino', 'Brush Script MT', cursive;
+  font-size: clamp(1.45rem, 4vw, 2.05rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1;
   color: var(--muted);
+  animation: eyebrow-reveal 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.eyebrow-text {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(110deg, var(--muted) 10%, var(--fg) 44%, var(--muted) 72%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.eyebrow-text::before {
+  content: '';
+  position: absolute;
+  inset: -0.25rem -0.35rem;
+  background: linear-gradient(
+    105deg,
+    transparent 32%,
+    rgba(255, 255, 255, 0.88) 50%,
+    transparent 68%
+  );
+  transform: translateX(-120%) skewX(-18deg);
+  animation: eyebrow-shine 900ms cubic-bezier(0.22, 1, 0.36, 1) 160ms both;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.eyebrow-text::after {
+  content: '✦';
+  position: absolute;
+  top: -0.45rem;
+  right: -0.85rem;
+  color: var(--fg);
+  font-family: Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1;
+  text-shadow: 0 0 14px color-mix(in srgb, var(--fg) 36%, transparent);
+  transform-origin: center;
+  animation: eyebrow-spark 820ms cubic-bezier(0.16, 1, 0.3, 1) 520ms both;
+  pointer-events: none;
 }
 
 .title {
@@ -219,14 +262,62 @@ async function copySnippet() {
 
 .eyebrow::before,
 .eyebrow::after {
-  content: '';
-  display: inline-block;
-  width: 1.5rem;
-  height: 1px;
-  background: currentColor;
-  vertical-align: middle;
-  margin: 0 0.6rem;
-  opacity: 0.5;
+  display: none;
+}
+
+@keyframes eyebrow-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(0.35rem) scale(0.98);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes eyebrow-shine {
+  0% {
+    opacity: 0;
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(120%) skewX(-18deg);
+  }
+}
+
+@keyframes eyebrow-spark {
+  0% {
+    opacity: 0;
+    transform: scale(0.2) rotate(-35deg);
+  }
+  35% {
+    opacity: 1;
+    transform: scale(1.35) rotate(8deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.75) rotate(28deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow,
+  .eyebrow-text::before,
+  .eyebrow-text::after {
+    animation: none;
+  }
+
+  .eyebrow-text::before,
+  .eyebrow-text::after {
+    opacity: 0;
+  }
 }
 
 .actions {
@@ -235,7 +326,7 @@ async function copySnippet() {
   align-items: center;
   justify-content: center;
   gap: 0.625rem;
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
   width: 100%;
 }
 
@@ -308,25 +399,13 @@ async function copySnippet() {
   flex-shrink: 0;
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 .x-icon {
   display: block;
   flex-shrink: 0;
 }
 
 .reference {
-  margin: 0.75rem 0 0;
+  margin: 1rem 0 0;
   font-size: 0.8125rem;
   color: var(--muted);
   letter-spacing: 0.01em;
