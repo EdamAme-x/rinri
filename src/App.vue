@@ -67,7 +67,7 @@ async function copySnippet() {
       <p class="eyebrow"><span class="eyebrow-text">Engineering Ethics</span></p>
       <h1 class="title">技術者倫理を守ろう</h1>
 
-      <p class="sr-only">技術者倫理を守ろう。</p>
+      <p class="sr-only">確かな技術は、誠実な倫理から生まれる。</p>
 
       <div class="actions">
         <a class="btn btn-primary" :href="SEARCH_URL" target="_blank" rel="noopener noreferrer">
