@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - OGP / Twitter Card metadata: title and description set to `技術者倫理を守ろう`
 - Centered call-to-action button linking to a Google search for 技術者倫理
 - X (Twitter) share button
-- Footer links to `discord.gg/evex` and `github.com/EdamAme-x/rinri`
+- Footer links to `x.com/evex_dev` and `github.com/EdamAme-x/rinri`
 - HTML comment easter egg: 技術者倫理を守ろう
 - Repository hygiene: LICENSE, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY,
   Issue/PR templates, CODEOWNERS, FUNDING, Dependabot, CodeQL, dependency-review,

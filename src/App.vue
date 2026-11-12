@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { ArrowRight, Check, ChevronRight, Copy } from 'lucide-vue-next'
-import { XIcon, DiscordIcon, GitHubIcon } from 'vue3-simple-icons'
+import { XIcon, GitHubIcon } from 'vue3-simple-icons'
 
 const SEARCH_URL = 'https://www.google.com/search?q=%E6%8A%80%E8%A1%93%E8%80%85%E5%80%AB%E7%90%86'
 const ACM_CODE_URL = 'https://www.acm.org/binaries/content/assets/code-of-ethics/se-code-jpn.pdf'
 const ACM_CODE_MD_URL = 'https://github.com/EdamAme-x/rinri/blob/main/docs/se-code-jpn.md'
-const DISCORD_URL = 'https://discord.gg/evex'
+const X_PROFILE_URL = 'https://x.com/evex_dev'
 const GITHUB_URL = 'https://github.com/EdamAme-x/rinri'
 const SITE_URL = 'https://技術者倫理.com'
 
@@ -143,13 +143,13 @@ async function copySnippet() {
     <footer class="footer">
       <a
         class="icon-link"
-        :href="DISCORD_URL"
+        :href="X_PROFILE_URL"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Discord (evex)"
-        title="discord.gg/evex"
+        aria-label="X (@evex_dev)"
+        title="x.com/evex_dev"
       >
-        <DiscordIcon :size="20" aria-hidden="true" />
+        <XIcon :size="18" aria-hidden="true" />
       </a>
 
       <span class="sep" aria-hidden="true">/</span>
