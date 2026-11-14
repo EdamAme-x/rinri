@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>技術者倫理.com グッズ プレビュー</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 24px;
+        font:
+          13px/1.5 system-ui,
+          sans-serif;
+        background: #d9d9d9;
+        color: #333;
+      }
+      h2 {
+        margin: 28px 0 10px;
+        font-size: 14px;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+        gap: 16px;
+      }
+      .card {
+        display: grid;
+        place-items: center;
+        min-height: 260px;
+        padding: 32px;
+        border-radius: 10px;
+      }
+      .card.light {
+        background: #ffffff;
+      }
+      .card.dark {
+        background: #141414;
+      }
+      .card img {
+        max-width: 78%;
+        max-height: 220px;
+      }
+      .card.stamp img {
+        max-width: 220px;
+      }
+      .label {
+        margin-top: 6px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>1. 技術者倫理.com（Tシャツ表面・ステッカー）</h2>
+    <div class="row">
+      <div class="card light"><img src="rinri-com_black.svg" alt="" /></div>
+      <div class="card dark"><img src="rinri-com_white.svg" alt="" /></div>
+    </div>
+    <h2>2. 技術者倫理 / 遵守（Tシャツ裏面・ステッカー）</h2>
+    <div class="row">
+      <div class="card light stamp"><img src="junshu_black.svg" alt="" /></div>
+      <div class="card dark stamp"><img src="junshu_white.svg" alt="" /></div>
+    </div>
+  </body>
+</html>
